@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <head>
-    <!--<link rel="stylesheet" href="styles.css">-->
+    {% load static %}
+    <link rel="stylesheet" href="{% static "core/styles.css" %}">
 </head>
 <body>
-    <h1>Recipe Roller</h1>
-    <p>A site for when you can't decide what to eat.</p>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <button id="rollbutton">Roll for a recipe!</button>
-    </form>
-</body>
+    <div class="upper-container">
+        <h1>Recipe Roller</h1>
+        <p>A site for when you can't decide what to eat.</p>
+    </div>
+    <div class="lower-container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button id="rollbutton">Roll for a recipe!</button>
+        </form> 
+    </div>
+</body> 
