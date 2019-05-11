@@ -1,13 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Recipe, Ingredient, Recipe_Step
+from random import randint
 
 # Create your views here.
 
 def index(request):
+    if request.method == "POST":
+        return redir()
+        
     return render(request, 'core/index.html')
 
 def recipe(request, recipe_id):
+    if request.method == "POST":
+        return redir()
+
     print(recipe_id)
-    r = Recipe.objects.get(id=int(recipe_id))
-    print(r)
-    return render(request, 'core/recipe.html')
+    r = Recipe.objects.select_related().get(id=int(recipe_id))
+    ingredients = list(r.ingredients.values_list('name', flat=True))
+    steps = list(r.recipe_step.values_list('description', flat=True))
+    context = {
+        'name': r.name,
+        'ingredients': ingredients,
+        'steps': steps,
+
+    }
+    return render(request, 'core/recipe.html', context=context)
+
+def redir():
+    length = Recipe.objects.all().count()
+    recipe = randint(1,length)
+    path = '/recipe/' + str(recipe) + "/"
+    return redirect(path)

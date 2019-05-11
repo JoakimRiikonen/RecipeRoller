@@ -3,32 +3,30 @@
 
 </head>
 <body>
-    <h1>Sweet potatos and shit</h1>
-    <button>Roll for another one</button>
+    <h1>{{ name }}</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <button>Roll for another one</button>
+    </form>
     <div id="Ingredients">
         <table id="Ingredients_table">
             <th className="Ingredients_table_heading">
             <span id="title">Ingredients</span>
             <span id="servings">4 servings</span>
             </th>
+            {% for item in ingredients %}
             <tr className="Ingredients_table_row">
-            <td>4 potato</td>
+            <td>{{ item }}</td>
             </tr> 
-            <tr className="Ingredients_table_row">
-            <td>4 potato</td>
-            </tr>
-            <tr className="Ingredients_table_row">
-            <td>4 potato</td>
-            </tr>  
+            {% endfor %}
         </table>
     </div>
     <div id="Instructions">
         <span id="title">Instructions</span>
         <ol>
-            <li>Do stuff</li>
-            <li>Do stuff</li>
-            <li>Do stuff</li>
-            <li>Do stuff</li>
+            {% for item in steps %}
+            <li>{{ item }}</li>
+            {% endfor %}
         </ol>
     </div>
 </body>
