@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <head>
-
+    {% load static %}
+    <link rel="stylesheet" href="{% static "core/styles.css" %}">
 </head>
 <body>
-    <h1>{{ name }}</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <button>Roll for another one</button>
-    </form>
-    <div id="Ingredients">
-        <table id="Ingredients_table">
-            <th className="Ingredients_table_heading">
-            <span id="title">Ingredients</span>
-            <span id="servings">4 servings</span>
-            </th>
-            {% for item in ingredients %}
-            <tr className="Ingredients_table_row">
-            <td>{{ item }}</td>
-            </tr> 
-            {% endfor %}
-        </table>
+    <div class="upper-container">
+        <h1>{{ name }}</h1>
+        <p>{{ description }}</p>
+        <div id="ingredients">
+            <table id="Ingredients_table">
+                <th className="ingredients_table_heading">
+                    <span id="title">Ingredients</span>
+                </th>
+                {% for item in ingredients %}
+                <tr className="Ingredients_table_row">
+                <td>{{ item }}</td>
+                </tr> 
+                {% endfor %}
+            </table>
+        </div>
+        <div id="Instructions">
+            <span id="title">Instructions</span>
+            <ol>
+                {% for item in steps %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ol>
+        </div>  
     </div>
-    <div id="Instructions">
-        <span id="title">Instructions</span>
-        <ol>
-            {% for item in steps %}
-            <li>{{ item }}</li>
-            {% endfor %}
-        </ol>
+    <div class="lower-container">
+        <p>Not happy?</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button>Roll for another one</button>
+        </form>
     </div>
 </body>

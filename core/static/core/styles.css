@@ -7,10 +7,12 @@ body {
 .upper-container {
     background-color: rgb(255, 136, 0);
     padding: 30px;
+    color: white;
 }
 
 .lower-container {
     padding: 30px;
+    color: rgb(255, 136, 0);
 }
 
 h1 {
@@ -20,7 +22,6 @@ h1 {
 
 p {
     font-size: 30px;
-    color: white;
 }
 
 button {
@@ -42,4 +43,11 @@ button:hover {
 button:active {
     background-color: white;
     color: rgb(255, 136, 0);
+}
+
+#ingredients {
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white;
+    padding: 10px;
 }

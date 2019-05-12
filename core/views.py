@@ -20,6 +20,7 @@ def recipe(request, recipe_id):
     steps = list(r.recipe_step.values_list('description', flat=True))
     context = {
         'name': r.name,
+        'description': r.description,
         'ingredients': ingredients,
         'steps': steps,
 
