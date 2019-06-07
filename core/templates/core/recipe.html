@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static "core/styles.css" %}">
+    <link rel="stylesheet" href="{% static "core/styles2.css" %}">
 </head>
 <body>
     <div class="upper-container">
         <h1>{{ name }}</h1>
         <p>{{ description }}</p>
+    </div>
+    <div class="lower-container">
         <div id="ingredients">
             <table id="Ingredients_table">
                 <th className="ingredients_table_heading">
@@ -19,7 +21,7 @@
                 {% endfor %}
             </table>
         </div>
-        <div id="Instructions">
+        <div id="instructions">
             <span id="title">Instructions</span>
             <ol>
                 {% for item in steps %}
@@ -28,11 +30,9 @@
             </ol>
         </div>  
     </div>
-    <div class="lower-container">
-        <p>Not happy?</p>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <button>Roll for another one</button>
-        </form>
-    </div>
+    <p>Not happy?</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <button>Roll for another one</button>
+    </form>
 </body>
