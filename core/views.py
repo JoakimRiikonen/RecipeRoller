@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
 from .models import Recipe, Ingredient, Recipe_Step
 from random import randint
 
@@ -32,3 +33,9 @@ def redir():
     recipe = randint(1,length)
     path = '/recipe/' + str(recipe) + "/"
     return redirect(path)
+
+class listrecipes(ListView):
+    model = Recipe
+    context_object_name = 'recipes'
+    template_name = 'core/listrecipes.html'
+    
