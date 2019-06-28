@@ -142,7 +142,7 @@ td {
 #recipeslist {
     display: inline-block;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     margin: 0 auto;
 }
 
@@ -154,7 +154,7 @@ td {
 
 #recipeslist li{
     text-align: left;
-    padding: 5px;
+    padding: 10px;
 }
 
 #recipeslist a{
@@ -164,4 +164,86 @@ td {
 
 #recipeslist a:hover{
     text-decoration: underline;
+}
+
+input[type=text]{
+    font-size: 20px;
+    width: 100%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+}
+    
+input[type=text].newfield {
+    border: 1px solid #999999;
+    color: #999999;
+}
+
+textarea {
+    font-size: 20px;
+    font-family: "Helvetica", Serif;
+    width: 100%;
+    height: 100px;
+    padding: 12px 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+input[type=submit]{
+    background-color: white;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #2c2c2c;
+    color: #2c2c2c;
+    padding: 7px 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+}
+
+input[type=submit]:hover{
+    background-color: #2c2c2c;
+    color: white;
+    cursor: pointer;
+}
+
+input[type=submit]:active{
+    background-color: white;
+    color: #2c2c2c;
+}
+
+button:hover {
+    background-color: #2c2c2c;
+    color: white;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: white;
+    color: #2c2c2c;
+}
+
+#inputs{
+    margin: 0 auto;
+    width: 40%;
+}
+
+#inputtitle{
+    text-align: left;
+    margin: 15px 0 0 0;
+}
+
+.error{
+    float:left;
+    font-size: 18px;
+    padding: 0 4px;
+    color: #FF4D4D;
 }
