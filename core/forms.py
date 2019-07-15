@@ -17,7 +17,7 @@ class AddRecipeForm(forms.Form):
     # correct key will be different in prod
     v = validators.RegexValidator(r'1234', "Auth key is invalid", "invalid")
     authkey = forms.CharField(validators=[v])
-    authkey.widget.attrs = {'placeholder': 'Confirm the auth token'}
+    authkey.widget.attrs = {'placeholder': 'Confirm the authorization key'}
 
     def __init__(self, *args, **kwargs):
         extra_ingredients = kwargs.pop('extra_ingredients', 0)

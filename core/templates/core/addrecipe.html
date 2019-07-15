@@ -1,47 +1,8 @@
 {% extends "core/base.html" %}
 {% block content %}
-<p id="title">Add a recipe</p>
+<h1 id="title">Add a recipe</h1>
 <form method="POST" autocomplete="off">
     {% csrf_token %}
-    <!--
-    <div id="inputs">
-        <p id="inputtitle">Name</p>
-        <input type="text" name="recipename" placeholder="Name"> <br>
-        <p id="inputtitle">Ingredients</p>
-        <div id="ingredient-inputs">
-            <input type="text" name="ingredient0" placeholder="Add an ingredient">
-        </div>
-        <p id="inputtitle">Instructions</p>
-        <div id="instruction-inputs">
-            <input type="text" name="instruction0" placeholder="Add an instruction">
-        </div>
-        <p id="inputtitle">Auth token</p>
-        <input type="text" name="authkey" placeholder="Confirm the auth token">
-        <input type="submit" value="Submit">
-    </div>
-    {% if error %}
-    <p>{{ error }}</p>
-    {% endif %}
-    -->
-    <!--
-    <div id="inputs">
-        <p id="inputtitle">Name</p>
-        {{ form.name }}
-        <p id="inputtitle">Description</p>
-        {{ form.description }}
-        <p id=inputtitle>Ingredients</p>
-        <div id="ingredient-inputs">
-            {{ form.ingredient0 }}
-        </div>
-        <p id="inputtitle">Instructions</p>
-        <div id="instruction-inputs">
-            {{ form.instruction0 }}
-        </div>
-        <p id="inputtitle">Auth token</p>
-        {{ form.authkey }}
-        <input type="submit" value="Submit">
-    </div>
-    -->
     <div id="inputs">
         <input type="hidden" id="extra_ingredients" name="extra_ingredients">
         <input type="hidden" id="extra_instructions", name="extra_instructions">
@@ -55,32 +16,14 @@
         <p id="inputtitle">Instructions</p>
         <div id="instruction-inputs">
         </div>
-        <p id="inputtitle">Auth token</p>
+        <p id="inputtitle">Authorization key</p>
         {{ form.authkey }}
         {% for error in form.authkey.errors %}
             <div class="error">
                 {{error|escape}}
             </div>
         {% endfor %}
-        <input type="submit" value="Submit">
-        
-        <!-- 
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        -->
-        
+        <input type="submit" value="Submit">     
     </div>
 </form>
 {% load static %}

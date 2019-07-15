@@ -25,15 +25,15 @@ def recipe(request, recipe_id):
         'description': r.description,
         'ingredients': ingredients,
         'steps': steps,
-
     }
     return render(request, 'core/recipe.html', context=context)
 
 def redir():
     length = Recipe.objects.all().count()
-    recipe = randint(1,length)
-    path = '/recipe/' + str(recipe) + "/"
-    return redirect(path)
+    if length > 0:
+        recipe = randint(1,length)
+        path = '/recipe/' + str(recipe) + "/"
+        return redirect(path)
 
 class listrecipes(ListView):
     model = Recipe
@@ -66,4 +66,7 @@ def addrecipe(request):
     else:
         form = AddRecipeForm()
     return render(request, 'core/addrecipe.html', {'form': form})
+
+def about(request):
+    return render(request, 'core/about.html')
     
