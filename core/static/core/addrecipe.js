@@ -21,15 +21,6 @@ function createIngredientInput(){
 
     extraIngredientsdiv.value = numOfIngredientInputs;
 
-    /*
-    inputElem.addEventListener('click', () => {
-        if(inputElem.classList.contains("newfield")){
-            inputElem.classList.remove("newfield");
-            createIngredientInput();
-        }
-    });
-    */
-
     inputElem.addEventListener('input', () =>{
         if(inputElem.classList.contains("newfield")){
             inputElem.classList.remove("newfield");
