@@ -12,17 +12,37 @@ class Recipe(models.Model):
         return self.name
 
 
+class IngredientGroup(models.Model):
+    title = models.CharField(max_length=50)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredient_groups')
+    orderindex = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=50)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+    ingredientgroup = models.ForeignKey(IngredientGroup, on_delete=models.CASCADE, related_name='ingredients')
+    orderindex = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
 
 
-class Recipe_Step(models.Model):
+class InstructionGroup(models.Model):
+    title = models.CharField(max_length=50)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='instruction_groups')
+    orderindex = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+
+class Instruction(models.Model):
     description = models.CharField(max_length=200)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='recipe_step')
+    instructiongroup = models.ForeignKey(InstructionGroup, on_delete=models.CASCADE, related_name='instructions')
+    orderindex = models.IntegerField(default=0)
 
     def __str__(self):
         return self.description

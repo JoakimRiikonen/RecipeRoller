@@ -1,0 +1,64 @@
+GET http://localhost:8000/api/recipes
+
+###
+GET http://localhost:8000/api/recipes/1
+
+###
+POST http://localhost:8000/api/recipes/ HTTP/1.1
+Content-Type: application/json
+
+ {
+    "name": "VALIDTEST",
+    "token": "1234",
+    "description": "Test recipe",
+    "ingredient_groups": [
+      {
+        "title": "base",
+        "ingredients": [
+          {
+            "name": "3 thaang"
+          },
+          {
+            "name": "2 thing"
+          }
+        ]
+      },
+      {
+        "title": "Sauce",
+        "ingredients": [
+          {
+            "name": "water"
+          },
+          {
+            "name": "oil"
+          }
+        ]
+      }
+    ],
+    "instruction_groups": [
+      {
+        "title": "base",
+        "instructions": [
+          {
+            "description": "do thing"
+          },
+          {
+            "description": "add stuff"
+          }
+        ]
+      },
+      {
+        "title": "Sauce",
+        "instructions": [
+          {
+            "description": "boil water"
+          },
+          {
+            "description": "add oil"
+          }
+        ]
+      }
+    ]
+  }
+
+
