@@ -8,8 +8,8 @@ POST http://localhost:8000/api/recipes/ HTTP/1.1
 Content-Type: application/json
 
  {
-    "name": "VALIDTEST",
-    "token": "1234",
+    "name": "AAAAAA",
+    "token": "",
     "description": "Test recipe",
     "ingredient_groups": [
       {
