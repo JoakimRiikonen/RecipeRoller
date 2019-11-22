@@ -33,7 +33,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Recipe
-    fields = ['name', 'creation_date', 'description', 'ingredient_groups', 'instruction_groups']
+    fields = ['name', 'creation_date', 'description', 'image_url', 'ingredient_groups', 'instruction_groups']
 
   # al dente
   def create(self, validated_data):
