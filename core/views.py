@@ -37,3 +37,8 @@ def recipe_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = RecipeSerializer(recipe)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def recipe_count(request):
+    count = Recipe.objects.count()
+    return Response({'recipe_count': count})
