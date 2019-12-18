@@ -12,18 +12,41 @@ POST http://localhost:8000/api/recipes/ HTTP/1.1
 Content-Type: application/json
 
  {
-    "name": "CCCCCCC",
+    "name": "Cabbage Stir Fry",
     "token": "1234",
-    "description": "Test recipe",
+    "description": "A customizable stir fry recipe that uses cabbage as the base of the recipe instead of the usual rice or noodles. About 3 servings.",
+    "tags": [
+      {
+        "name": "stir fry"
+      },
+      {
+        "name": "hot"
+      }
+    ],
     "ingredient_groups": [
       {
         "title": "base",
         "ingredients": [
           {
-            "name": "3 thaang"
+            "name": "1/2 (large) head green cabbage"
           },
           {
-            "name": "2 thing"
+            "name": "2 carrots"
+          },
+          {
+            "name": "3 green onions"
+          },
+          {
+            "name": "~300g meat of choice"
+          },
+          {
+            "name": "2 cloves garlic"
+          },
+          {
+            "name": "1 Tbps fresh ginger"
+          },
+          {
+            "name": "Pinch of salt and pepper"
           }
         ]
       },
@@ -31,10 +54,16 @@ Content-Type: application/json
         "title": "Sauce",
         "ingredients": [
           {
-            "name": "water"
+            "name": "2 Tbsp soy sauce"
           },
           {
-            "name": "oil"
+            "name": "1 Tbsp toasted sesame oil"
+          },
+          {
+            "name": "1 Tbsp sriracha"
+          },
+          {
+            "name": "1/2 Tbsp brown sugar"
           }
         ]
       }
@@ -44,21 +73,120 @@ Content-Type: application/json
         "title": "base",
         "instructions": [
           {
-            "description": "do thing"
+            "description": "In a small bowl stir together the soy sauce, toasted sesame oil, sriracha and brown sugar. Set the sauce aside."
           },
           {
-            "description": "add stuff"
+            "description": "Shred the vegetables. Feel free to use a grater for the carrots and the ginger."
+          },
+          {
+            "description": "Heat a large skillet over medium heat. Once hot add cooking oil, the meat of choice, garlic, ginger and a pinch of salt and pepper. Cook until the meat is cooked through."
+          },
+          {
+            "description": "Add the cabbage and carrots to the skillet and continue to cook until the cabbage is slightly wilted."
+          },
+          {
+            "description": "Stir in the prepared sauce and the green onions. Serve."
+          }
+        ]
+      }
+    ]
+  }
+
+###
+
+POST http://localhost:8000/api/recipes/ HTTP/1.1
+Content-Type: application/json
+
+ {
+    "name": "Sheet Pan Cashew Chicken",
+    "token": "1234",
+    "description": "Easy and fast dish that creates barely any dishes. About 4-5 servings Note: do use the low-sodium soy sauce, normal soy sauce makes this dish way too salty.",
+    "tags": [
+      {
+        "name": "rice"
+      },
+      {
+        "name": "chicken"
+      }
+    ],
+    "ingredient_groups": [
+      {
+        "title": "base",
+        "ingredients": [
+          {
+            "name": "400g chicken meat sliced into 2-3cm cubes"
+          },
+          {
+            "name": "About 1 head of broccoli"
+          },
+          {
+            "name": "1-1.5 bell peppers, chopped"
+          },
+          {
+            "name": "~2dl unsalted cashew nuts"
           }
         ]
       },
       {
         "title": "Sauce",
-        "instructions": [
+        "ingredients": [
           {
-            "description": "boil water"
+            "name": "6 tbsp low-sodium soy sauce"
           },
           {
-            "description": "add oil"
+            "name": "1 tbsp hoisin sauce"
+          },
+          {
+            "name": "3/4 tbsp apple cider vinegar"
+          },
+          {
+            "name": "2 tbsp honey"
+          },
+          {
+            "name": "1 tbsp toasted sesame oil"
+          },
+          {
+            "name": "1/2 tbsp fresh minced ginger"
+          },
+          {
+            "name": "2 cloves garlic minced"
+          },
+          {
+            "name": "2 tbsp cornstach"
+          },
+          {
+            "name": "1.5dl+ water"
+          }
+        ]
+      }
+    ],
+    "instruction_groups": [
+      {
+        "title": "base",
+        "instructions": [
+          {
+            "description": "Preheat oven to 200C"
+          },
+          {
+            "description": "For the sauce, whisk together the soy sauce, hoisin sauce, vinegar, honey, sesame oil, garlic, ginger, cornstarch and water in a sauce pan."
+          },
+          {
+            "description": "Bring the sauce to a simmer, stirring frequently, until the sauce thickens. Remove from heat."
+          },
+          {
+            "description": "Spread the chicken evenly to a sheet pan lined with parchment paper. Season with salt and pepper and then drizzle about half of the sauce over the chicken coating well on both sides."
+          },
+          {
+            "description": "Cook in the oven for 8 minutes then remove the pan."
+          },
+          {
+            "description": "Spread the broccoli, bell peppers and cashews around the chicken. Season with salt and pepper and drizzle the rest of the sauce over the pan"
+          },
+          {
+            "description": "Return the pan to the oven and cook for another 8-12 minutes until the chicken is cooked through."
+          },
+          {
+            "description": "Remove the pan from the oven and enjoy. Serve with rice."
           }
         ]
       }

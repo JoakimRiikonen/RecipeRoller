@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from 'react'
+import Menu from './components/Menu'
+import Frontpage from './components/Frontpage'
+import Recipe from './components/Recipe'
+import AddRecipe from './components/AddRecipe'
 import recipeService from './services/recipes'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
 const App = () => {
 
-  const [recipes, setRecipes] = useState({})
+  const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
     recipeService
-      .getAll()
-      .then(recipes => {
-        setRecipes(recipes)
-      })
+    .getAll()
+    .then(data => {
+      setRecipes(data)
+    })
   }, [])
 
-  console.log(recipes)
+  if(recipes.length === 0){
+    return (
+      <div></div>
+    )
+  }
 
   return (
-    <div className="App">
-      moi
-    </div>
+    <Router>
+      <Menu/>
+      <Route exact path='/' render={() => (
+        <Frontpage recipeCount={recipes.length}/>
+      )}/>
+      <Route exact path='/recipe/:id' render={({ match }) => (
+        <Recipe
+          recipe={recipes[match.params.id-1]}
+          recipeCount={recipes.length}
+        />
+      )}/>
+      <Route exact path='/add' render={() => (
+        <AddRecipe/>
+      )}/>
+    </Router>
   );
 }
 

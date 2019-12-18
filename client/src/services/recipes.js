@@ -7,12 +7,12 @@ const getAll = () => {
 }
 
 const getOne = (id) => {
-  const request = axios.get(baseUrl + `${id}`)
+  const request = axios.get(baseUrl + `/${id}`)
   return request.then(res => res.data)
 }
 
 const getCount = () => {
-  const request = axios.get(baseUrl = '/count')
+  const request = axios.get(baseUrl + '/count')
   return request.then(res => res.data)
 }
 
