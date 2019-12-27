@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/recipes'
+const baseUrl = '/api/recipes/'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -16,4 +16,9 @@ const getCount = () => {
   return request.then(res => res.data)
 }
 
-export default { getAll, getOne, getCount }
+const create = (object) => {
+  const request = axios.post(baseUrl, object)
+  return request.then(res => res.data)
+}
+
+export default { getAll, getOne, getCount, create }

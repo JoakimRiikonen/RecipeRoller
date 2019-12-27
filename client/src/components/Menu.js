@@ -21,6 +21,8 @@ const Menu = (props) => {
     text-decoration: none;
     letter-spacing: .1em;
 
+    transition: color 0.1s;
+
     &:hover {
       color: orange;
     }

@@ -18,8 +18,15 @@ const App = () => {
     .getAll()
     .then(data => {
       setRecipes(data)
+      console.log(data)
     })
   }, [])
+
+  const addRecipe = (recipe) => {
+    console.log('hello')
+    setRecipes(recipes.concat(recipe))
+    return recipes.length
+  }
 
   if(recipes.length === 0){
     return (
@@ -40,7 +47,7 @@ const App = () => {
         />
       )}/>
       <Route exact path='/add' render={() => (
-        <AddRecipe/>
+        <AddRecipe addRecipe={addRecipe}/>
       )}/>
     </Router>
   );

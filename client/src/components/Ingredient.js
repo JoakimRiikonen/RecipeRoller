@@ -50,7 +50,7 @@ const Ingredient = (props) => {
 
   if(checked) return (
     <Container>
-      <IconContainer>
+      <IconContainer onClick={() => setChecked(!checked)}>
         <OrangeIcon viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
         </OrangeIcon>
@@ -63,7 +63,7 @@ const Ingredient = (props) => {
 
   return(
     <Container>
-      <IconContainer>
+      <IconContainer onClick={() => setChecked(!checked)}>
         <Icon viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
         </Icon>

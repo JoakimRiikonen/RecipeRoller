@@ -1,4 +1,5 @@
 import React from 'react'
+import Tags from './Tags'
 import Ingredients from './Ingredients'
 import Instructions from './Instructions'
 import { withRouter } from 'react-router-dom'
@@ -34,6 +35,7 @@ const Recipe = (props) => {
 
   const Title = styled.h1`
     font-size: 50px;
+    margin-bottom: 10px;
   `
 
   const Description = styled.p`
@@ -50,6 +52,7 @@ const Recipe = (props) => {
     <>
     <UpperContainer>
       <Title>{props.recipe.name}</Title>
+      <Tags tags={props.recipe.tags}/>
       <Description>{props.recipe.description}</Description>
       {/* {props.recipe.image_url ? (
         <img src={props.recipe.image_url} alt="food"/>

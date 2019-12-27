@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 
 const RollButton = (props) => {
 
-  const Container = styled.div`
+  /* const Container = styled.div`
     text-align: center;
     padding-top: 30px;
   `
@@ -74,14 +74,65 @@ const RollButton = (props) => {
     ${ButtonContainer}:hover & {
       animation: ${rotate} 2s linear infinite;
     }
-  `
+  ` */
   
-  return (
+  /* return (
     <ButtonContainer>
         <ButtonEdge/>
         <Button onClick={props.onClick}>
           CLICK TO ROLL
         </Button>
+    </ButtonContainer>
+  ) */
+
+  const ButtonContainer = styled.div`
+    width: 250px;
+    height: 250px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 50%;
+  `
+
+  const Highlight = styled.span`
+    transition: color 0.2s;
+  `
+
+  const Button = styled.button`
+    position: absolute;
+    top: 7px;
+    bottom: 0;
+    left: 7px;
+    right: 0;
+    display: block;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: none;
+    font-family: "Alatsi", "Verdana", Sans-serif;
+    font-size: 35px;
+
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid black;
+
+    transition: border 0.2s;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover ${Highlight} {
+      color: orange;
+    }
+  `
+
+  return(
+    <ButtonContainer>
+      <Button onClick={props.onClick}>
+          CLICK TO <Highlight>ROLL</Highlight>
+      </Button>
     </ButtonContainer>
   )
 }

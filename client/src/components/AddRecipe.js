@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ARTextField from './ARTextField'
-import ARTextareaField from './ARTextareaField'
+import { withRouter } from 'react-router-dom'
+import recipeService from '../services/recipes'
 
 const Container = styled.div`
   font-family: "montserrat", "Helvetica", Sans-serif;
@@ -52,6 +52,28 @@ const TextareaField = styled.textarea`
 `
 
 const SubmitButton = styled.input.attrs({ type: 'submit'})`
+  display: block;
+  font-family: "montserrat", "Helvetica", Sans-serif;
+  background: white;
+  width: 60%;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 12px 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    color: orange;
+  }
+`
+
+const Errors = styled.div`
+  color: red;
 `
 /* <Container>
       <Title>Add a recipe</Title>
@@ -86,15 +108,114 @@ const AddRecipe = (props) => {
   const [instructions, setInstructions] = useState(['',])
   const [tags, setTags] = useState(['',])
   const [authKey, setAuthKey] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault()
+    console.log('hello')
     console.log(name)
     console.log(description)
     console.log(ingredientGroups)
     console.log(instructions)
+    console.log('tags')
     console.log(tags)
     console.log(authKey)
+    if(!validateForm()) return
+    setError('All is OK')
+    let newRecipe = createRecipeObject()
+    console.log(newRecipe)
+    let okToRedirect = false
+    let recipesCount = 0
+    await recipeService.create(newRecipe)
+      .then((data) => {
+        recipesCount = props.addRecipe(data)
+        okToRedirect = true
+      })
+      .catch(err => {
+        console.log(err)
+        if(err.response.status === 403){
+           setError('Incorrect authorization key.')
+        }
+        else if(err.response.status === 400){
+          setError('Unexpected error has occured.')
+          console.log(err.response.data)
+        }
+      })
+    if(okToRedirect) props.history.push(`/recipe/${recipesCount-1}`)
+  }
+
+  const validateForm = () => {
+    //value checks
+    if(name === ''){
+      setError('Name is required.')
+      return false
+    }
+    if(description === ''){
+      setError('Description is required.')
+      return false
+    }
+    if(ingredientGroups[0].ingredients.filter(Boolean).length === 0 && 
+      (ingredientGroups[1].name === undefined || ingredientGroups[1].ingredients[0] === '')){
+      setError('At least one ingredient is required.')
+      return false
+    }
+    if(instructions.filter(Boolean).length === 0){
+      setError('At least one instruction step is required.')
+      return false
+    }
+    if(tags.filter(Boolean).length === 0){
+      setError('At least one tag is required.')
+      return false
+    }
+    if(authKey === ''){
+      setError('Auth key is required.')
+      return false
+    }
+    return true
+  }
+
+  const createRecipeObject = () => {
+    let r = {
+      name,
+      description,
+      tags: [],
+      ingredient_groups: [],
+      instruction_groups: [{
+        title: 'base',
+        instructions: []
+      }],
+      token: authKey
+    }
+
+    console.log(tags)
+    tags.filter(Boolean).forEach(tag => {
+      r.tags.push({name: tag})
+    })
+
+    ingredientGroups.forEach((group) => {
+      if(group.name === undefined) return
+      let g = {
+        title: group.name,
+        ingredients: []
+      }
+      group.ingredients.filter(Boolean).forEach((ingredient) => {
+        g.ingredients.push({name: ingredient})
+      })
+      r.ingredient_groups.push(g)
+    })
+
+    instructions.filter(Boolean).forEach(instruction => {
+      r.instruction_groups[0].instructions.push({description: instruction})
+    })
+
+    return r
+  }
+
+  const setError = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage('')
+    }, 5000);
   }
 
   /*
@@ -149,6 +270,7 @@ const AddRecipe = (props) => {
     <Container>
       <form onSubmit={submitForm}>
         <Title>Add a recipe</Title>
+        <Errors>{errorMessage}</Errors>
         <FieldTitle>Name</FieldTitle>
         <TextField
           placeholder='Name'
@@ -264,10 +386,10 @@ const AddRecipe = (props) => {
           placeholder='Confirm the authorization key'
           onChange={({ target }) => setAuthKey(target.value)}
         />
-        <SubmitButton/>
+        <SubmitButton value="Submit"/>
       </form>
     </Container>
   )
 }
 
-export default AddRecipe
+export default withRouter(AddRecipe)
