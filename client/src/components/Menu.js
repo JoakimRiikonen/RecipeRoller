@@ -13,8 +13,9 @@ const Menu = (props) => {
   `
 
   const Button = styled(Link)`
-    padding: 10px;
-    margin: 5px;
+    display: inline-block;
+    padding: 0 10px;
+    margin: 0 5px;
     font-family: "montserrat", "Verdana", Sans-serif;
     font-weight: bold;
     color: black;
@@ -25,6 +26,10 @@ const Menu = (props) => {
 
     &:hover {
       color: orange;
+    }
+
+    @media(max-width: 550px){
+      padding: 0px;
     }
   `
 

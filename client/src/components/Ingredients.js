@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Ingredient from './Ingredient'
 
 const Ingredients = ({ingredients}) => {
@@ -26,14 +26,6 @@ const Ingredients = ({ingredients}) => {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  `
-
-
-  const ListElement = styled.li`
-    font-size: 25px;
-    display: flex;
-    padding: 4px;
-    padding-left: 15px;
   `
 
   return(

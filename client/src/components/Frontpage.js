@@ -1,7 +1,7 @@
 import React from 'react'
 import RollButton from './RollButton'
 import { withRouter } from 'react-router-dom'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 const Frontpage = (props) => {
 
@@ -19,10 +19,7 @@ const Frontpage = (props) => {
     text-align: center;
     padding-top: 30px;
   `
-
-  const Description = styled.p`
-  `
-
+  
   const Title = styled.h1`
     font-family: "Alatsi", "Verdana", Sans-serif;
     font-size: 50px;

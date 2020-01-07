@@ -44,10 +44,6 @@ const Ingredient = (props) => {
     }
   `
 
-  const GreyIcon = styled(Icon)`
-    stroke: grey;
-  `
-
   if(checked) return (
     <Container>
       <IconContainer onClick={() => setChecked(!checked)}>

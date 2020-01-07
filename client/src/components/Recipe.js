@@ -8,29 +8,29 @@ import styled from 'styled-components'
 const Recipe = (props) => {
 
   console.log(props.recipe)
-  
-  const handleClick = () => {
-    if(props.recipeCount === 0){
-      console.log('fetching data, please wait...')
-      return
-    }
-    console.log(props.recipeCount)
-    const recipeId = Math.floor(Math.random() * props.recipeCount + 1)
-    props.history.push(`/recipe/${recipeId}`)
-  }
 
   const UpperContainer = styled.div`
     text-align: center;
     font-family: "montserrat", "Helvetica", Sans-serif;
     width: 1000px;
     margin: 0 auto;
+
+    @media(max-width: 1000px){
+      width: 100%;
+    }
   `
 
   const LowerContainer = styled.div`
     margin: 0 auto;
     display: flex;
+    flex-wrap: wrap;
     width: 1000px;
     justify-content: center;
+
+    @media(max-width: 1000px){
+      width: 90%;
+      flex-direction: column;
+    }
   `
 
   const Title = styled.h1`
@@ -45,7 +45,12 @@ const Recipe = (props) => {
   `
 
   if(props.recipe === undefined){
-    return(<div></div>)
+    return(
+      <UpperContainer>
+        <Title>404 :(</Title>
+        <Description>No recipes to be seen here.</Description>
+      </UpperContainer>
+    )
   }
 
   return(
@@ -54,17 +59,11 @@ const Recipe = (props) => {
       <Title>{props.recipe.name}</Title>
       <Tags tags={props.recipe.tags}/>
       <Description>{props.recipe.description}</Description>
-      {/* {props.recipe.image_url ? (
-        <img src={props.recipe.image_url} alt="food"/>
-      ) : (
-        <div>no image :(</div>
-      )} */}
     </UpperContainer>
     <LowerContainer>
       <Ingredients ingredients={props.recipe.ingredient_groups}/>
       <Instructions instructions={props.recipe.instruction_groups}/>
     </LowerContainer>
-    {/* <button onClick={handleClick}>roll for another one</button> */}
   </>
   )
 }

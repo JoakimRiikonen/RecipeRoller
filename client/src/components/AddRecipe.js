@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import recipeService from '../services/recipes'
@@ -6,9 +6,12 @@ import recipeService from '../services/recipes'
 const Container = styled.div`
   font-family: "montserrat", "Helvetica", Sans-serif;
   
-  width: 1000px;
-  width: 40%;
+  width: 800px;
   margin: 0 auto;
+
+  @media(max-width: 888px){
+    width: 90%;
+  }
 `
 
 const Title = styled.h1`
@@ -75,25 +78,6 @@ const SubmitButton = styled.input.attrs({ type: 'submit'})`
 const Errors = styled.div`
   color: red;
 `
-/* <Container>
-      <Title>Add a recipe</Title>
-      <ARTextField
-        title='Name'
-        description='Name'
-      />
-      <ARTextareaField
-        title='Description'
-        description='Description'
-      />
-      <ARTextField
-        title='Ingredients'
-        description='Add an ingredient'
-      />
-      <ARTextField
-        description='Add an ingredient'
-      />
-    </Container> */
-
 const AddRecipe = (props) => {
 
   const [name, setName] = useState('')
@@ -110,20 +94,18 @@ const AddRecipe = (props) => {
   const [authKey, setAuthKey] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
+  var errorTimeout = undefined
+
+  useEffect(() => {
+    return function cleanup() {
+      clearTimeout(errorTimeout)
+    }
+  })
+
   const submitForm = async (event) => {
     event.preventDefault()
-    console.log('hello')
-    console.log(name)
-    console.log(description)
-    console.log(ingredientGroups)
-    console.log(instructions)
-    console.log('tags')
-    console.log(tags)
-    console.log(authKey)
     if(!validateForm()) return
-    setError('All is OK')
     let newRecipe = createRecipeObject()
-    console.log(newRecipe)
     let okToRedirect = false
     let recipesCount = 0
     await recipeService.create(newRecipe)
@@ -134,41 +116,51 @@ const AddRecipe = (props) => {
       .catch(err => {
         console.log(err)
         if(err.response.status === 403){
-           setError('Incorrect authorization key.')
+           setErrorMessage('Incorrect authorization key.')
         }
         else if(err.response.status === 400){
-          setError('Unexpected error has occured.')
+          setErrorMessage('Unexpected error has occured.')
           console.log(err.response.data)
         }
       })
-    if(okToRedirect) props.history.push(`/recipe/${recipesCount-1}`)
+    if(okToRedirect) props.history.push(`/recipe/${recipesCount}`)
   }
 
   const validateForm = () => {
     //value checks
     if(name === ''){
-      setError('Name is required.')
+      setErrorMessage('Name is required.')
       return false
     }
+    if(name.length > 50){
+      setErrorMessage('Name can not be longer than 50 letters.')
+    }
     if(description === ''){
-      setError('Description is required.')
+      setErrorMessage('Description is required.')
+      return false
+    }
+    if(description.length > 500){
+      setErrorMessage('Description can not be longer than 500 letters.')
       return false
     }
     if(ingredientGroups[0].ingredients.filter(Boolean).length === 0 && 
       (ingredientGroups[1].name === undefined || ingredientGroups[1].ingredients[0] === '')){
-      setError('At least one ingredient is required.')
+      setErrorMessage('At least one ingredient is required.')
       return false
     }
     if(instructions.filter(Boolean).length === 0){
-      setError('At least one instruction step is required.')
+      setErrorMessage('At least one instruction step is required.')
       return false
     }
     if(tags.filter(Boolean).length === 0){
-      setError('At least one tag is required.')
+      setErrorMessage('At least one tag is required.')
       return false
     }
+    if(tags.filter(tag => tag.length > 20).length !== 0){
+      setErrorMessage('A tag can not be longer than 20 letters.')
+    }
     if(authKey === ''){
-      setError('Auth key is required.')
+      setErrorMessage('Auth key is required.')
       return false
     }
     return true
@@ -187,13 +179,12 @@ const AddRecipe = (props) => {
       token: authKey
     }
 
-    console.log(tags)
     tags.filter(Boolean).forEach(tag => {
       r.tags.push({name: tag})
     })
 
     ingredientGroups.forEach((group) => {
-      if(group.name === undefined) return
+      if(group.name === undefined || group.name === '') return
       let g = {
         title: group.name,
         ingredients: []
@@ -211,21 +202,6 @@ const AddRecipe = (props) => {
     return r
   }
 
-  const setError = (message) => {
-    setErrorMessage(message)
-    setTimeout(() => {
-      setErrorMessage('')
-    }, 5000);
-  }
-
-  /*
-  [
-    {
-      name: ""
-      ingredients: []
-    },
-  ]
-  */
   const handleIngredientChange = (value, groupIndex, i) => {
     console.log(value + ' ' + groupIndex + ' ' + i)
     //apparently the correct way to clone a dict in JS
@@ -247,7 +223,6 @@ const AddRecipe = (props) => {
   }
 
   const handleInstructionChange = (value, i) => {
-    console.log(value + ' ' + i)
     let initialInstructions = [...instructions]
     initialInstructions[i] = value
     if(initialInstructions[initialInstructions.length-1]){
@@ -257,7 +232,6 @@ const AddRecipe = (props) => {
   }
 
   const handleTagChange = (value, i) => {
-    console.log(value + ' ' + i)
     let initialTags = [...tags]
     initialTags[i] = value
     if(initialTags[initialTags.length-1]){

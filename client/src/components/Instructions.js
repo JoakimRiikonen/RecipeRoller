@@ -15,6 +15,7 @@ const Instructions = ({instructions}) => {
     font-family: "montserrat", "Helvetica", Sans-serif;
     width: 100%
     flex: 0 0 50%;
+    padding-bottom: 20px;
   `
 
   const Title = styled.h2`
