@@ -10,7 +10,6 @@ const Frontpage = (props) => {
       console.log('fetching data, please wait...')
       return
     }
-    console.log(props.recipeCount)
     const recipeId = Math.floor(Math.random() * props.recipeCount + 1)
     props.history.push(`/recipe/${recipeId}`)
   }
@@ -28,7 +27,6 @@ const Frontpage = (props) => {
   return(
     <Container>
       <Title>RECIPE ROLLER</Title>
-      {/* <Description>Funny one liner</Description> */}
       <RollButton onClick={handleClick}/>
     </Container>
   )

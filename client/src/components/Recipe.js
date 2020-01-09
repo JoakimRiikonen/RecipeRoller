@@ -7,8 +7,6 @@ import styled from 'styled-components'
 
 const Recipe = (props) => {
 
-  console.log(props.recipe)
-
   const UpperContainer = styled.div`
     text-align: center;
     font-family: "montserrat", "Helvetica", Sans-serif;

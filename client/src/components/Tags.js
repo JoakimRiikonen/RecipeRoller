@@ -17,8 +17,6 @@ const Tag = styled.span`
 `
 
 const Tags = (props) => {
-  
-  console.log(props.tags)
 
   return(
     <Container>

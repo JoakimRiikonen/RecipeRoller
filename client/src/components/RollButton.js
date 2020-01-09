@@ -16,11 +16,6 @@ const RollButton = (props) => {
   `
 
   const Button = styled.button`
-    position: absolute;
-    top: 7px;
-    bottom: 0;
-    left: 7px;
-    right: 0;
     display: block;
     background-color: white;
     color: black;

@@ -45,10 +45,6 @@ const Instructions = ({instructions}) => {
     }
   `
 
-  /* <ListElement key={j} onClick={() => handleClick(j)}>
-                  {instruction.description}
-                </ListElement> */
-
   return(
     <Container>
       <Title>Instructions</Title>

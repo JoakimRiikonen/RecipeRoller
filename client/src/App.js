@@ -4,6 +4,7 @@ import Frontpage from './components/Frontpage'
 import Recipe from './components/Recipe'
 import RecipesList from './components/RecipesList'
 import AddRecipe from './components/AddRecipe'
+import About from './components/About'
 import EmptyPage from './components/EmptyPage'
 import recipeService from './services/recipes'
 import {
@@ -21,20 +22,14 @@ const App = () => {
     .getAll()
     .then(data => {
       setRecipes(data)
-      console.log(data)
     })
   }, [])
 
   const addRecipe = (recipe) => {
-    console.log('add')
-    console.log(recipe)
-    console.log('recipe length before: ' + recipes.length)
     //setting state is asynchronous, however await does not work
     //I should probably be using redux but its too late for that now
     let r = recipes.length
     setRecipes([...recipes, recipe])
-    console.log('recipe length after: ' + recipes.length)
-    console.log(recipes)
     return r + 1
   }
 
@@ -62,6 +57,9 @@ const App = () => {
         )}/>
         <Route exact path='/add' render={() => (
           <AddRecipe addRecipe={addRecipe}/>
+        )}/>
+        <Route exact path='/about' render={() => (
+          <About/>
         )}/>
         <Route>
           <EmptyPage/>
