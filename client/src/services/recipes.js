@@ -1,4 +1,8 @@
 import axios from 'axios'
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 const baseUrl = '/api/recipes/'
 
 const getAll = () => {

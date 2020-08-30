@@ -176,7 +176,7 @@ const AddRecipe = (props) => {
         title: 'base',
         instructions: []
       }],
-      token: authKey
+      token: authKey,
     }
 
     tags.filter(Boolean).forEach(tag => {
